@@ -1,0 +1,334 @@
+<title>TEQO — Concept 2: Grid</title>
+<meta name="description" content="Dark, enterprise-tech styling in the spirit of Tech Mahindra." />
+<style>
+  :root{
+    --bg:#0A0B0E;
+    --panel:#14161C;
+    --panel-2:#1B1E26;
+    --text:#F3F4F6;
+    --text-soft:#9096A6;
+    --line: rgba(255,255,255,0.10);
+    --red:#FF3B30;
+    --orange:#FF8A00;
+    --violet:#6E5BFF;
+  }
+  :root[data-theme="light"]{
+    --bg:#F5F5F7;
+    --panel:#FFFFFF;
+    --panel-2:#EDEDF2;
+    --text:#14161C;
+    --text-soft:#585F70;
+    --line: rgba(10,11,14,0.10);
+  }
+  @media (prefers-color-scheme: light){
+    :root:not([data-theme="dark"]){
+      --bg:#F5F5F7;
+      --panel:#FFFFFF;
+      --panel-2:#EDEDF2;
+      --text:#14161C;
+      --text-soft:#585F70;
+      --line: rgba(10,11,14,0.10);
+    }
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);color:var(--text);
+    font-family:ui-sans-serif,-apple-system,"Segoe UI",system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden;
+  }
+  a{color:inherit;}
+  .mono{font-family:ui-monospace,"SFMono-Regular","Menlo","Consolas",monospace;}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 32px;}
+  h1,h2,h3{font-weight:800;letter-spacing:-0.015em;text-wrap:balance;margin:0;}
+  .grad-text{background:linear-gradient(95deg,var(--red),var(--orange));-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .eyebrow{font-family:ui-monospace,"SFMono-Regular",monospace;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--orange);display:inline-flex;align-items:center;gap:10px;}
+  .eyebrow::before{content:"//";color:var(--red);}
+
+  header{position:sticky;top:0;z-index:50;background:color-mix(in srgb, var(--bg) 78%, transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:20px 32px;max-width:1200px;margin:0 auto;}
+  .logo{font-weight:800;font-size:21px;letter-spacing:-0.01em;display:flex;align-items:baseline;gap:8px;}
+  .logo span{font-size:11px;font-weight:600;color:var(--text-soft);text-transform:uppercase;letter-spacing:0.1em;}
+  nav.links{display:flex;gap:28px;font-size:13.5px;font-weight:600;}
+  nav.links a{text-decoration:none;color:var(--text-soft);}
+  nav.links a:hover,nav.links a:focus-visible{color:var(--text);outline:none;}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:6px;font-weight:700;font-size:13.5px;letter-spacing:0.02em;text-decoration:none;border:none;cursor:pointer;transition:transform .15s ease, box-shadow .15s ease;}
+  .btn-primary{background:linear-gradient(95deg,var(--red),var(--orange));color:#0A0B0E;}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(255,59,48,0.35);}
+  .btn-ghost{border:1px solid var(--line);background:transparent;color:var(--text);}
+  .btn-ghost:hover{border-color:var(--text-soft);}
+  .btn:focus-visible{outline:2px solid var(--orange);outline-offset:2px;}
+
+  .hero{position:relative;padding:96px 0 80px;overflow:hidden;}
+  .mesh{position:absolute;inset:-20% -10% auto -10%;height:900px;z-index:0;pointer-events:none;
+    background:
+      radial-gradient(560px 420px at 12% 20%, rgba(255,59,48,0.28), transparent 60%),
+      radial-gradient(620px 480px at 85% 8%, rgba(110,91,255,0.24), transparent 60%),
+      radial-gradient(500px 400px at 60% 55%, rgba(255,138,0,0.16), transparent 65%);
+    filter:blur(4px);
+  }
+  .grid-overlay{position:absolute;inset:0;z-index:0;opacity:0.5;
+    background-image:linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:56px 56px; mask-image:linear-gradient(180deg, black, transparent 75%);}
+  .hero-inner{position:relative;z-index:1;max-width:900px;}
+  .hero h1{font-size:clamp(36px,5vw,64px);line-height:1.04;margin:18px 0 22px;}
+  .hero p.lead{font-size:18px;color:var(--text-soft);max-width:56ch;line-height:1.65;margin:0 0 32px;}
+  .ctas{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:36px;}
+  .strip{display:flex;gap:28px;flex-wrap:wrap;padding-top:28px;border-top:1px solid var(--line);}
+  .strip div{font-size:12px;color:var(--text-soft);}
+  .strip strong{display:block;font-size:20px;color:var(--text);font-variant-numeric:tabular-nums;}
+
+  section{padding:80px 0;position:relative;}
+  .divider{height:1px;background:linear-gradient(90deg, transparent, var(--line) 20%, var(--line) 80%, transparent);}
+  .section-head{max-width:640px;margin-bottom:44px;}
+  .section-head h2{font-size:clamp(24px,2.8vw,34px);margin-top:14px;}
+  .section-head p{color:var(--text-soft);font-size:15.5px;line-height:1.6;margin-top:10px;}
+
+  .mosaic{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;}
+  @media (max-width:1024px){.mosaic{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:560px){.mosaic{grid-template-columns:1fr;}}
+
+  .glass{
+    background:linear-gradient(160deg, var(--panel), var(--panel-2));
+    border:1px solid var(--line);border-radius:14px;padding:24px 20px;
+    position:relative;overflow:hidden;transition:transform .2s ease, border-color .2s ease;
+  }
+  .glass::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(95deg,var(--red),var(--orange));opacity:0;transition:opacity .2s ease;}
+  .glass:hover{transform:translateY(-4px);border-color:rgba(255,138,0,0.4);}
+  .glass:hover::before{opacity:1;}
+  .icon-ring{width:46px;height:46px;border-radius:11px;display:flex;align-items:center;justify-content:center;background:rgba(255,138,0,0.10);border:1px solid rgba(255,138,0,0.25);margin-bottom:18px;}
+  .icon-ring svg{width:22px;height:22px;stroke:var(--orange);fill:none;stroke-width:1.7;}
+  .glass h3{font-size:15px;font-weight:700;margin-bottom:8px;line-height:1.3;}
+  .glass p{font-size:13px;color:var(--text-soft);line-height:1.55;margin:0;}
+  .glass .tag{font-family:ui-monospace,monospace;font-size:10.5px;color:var(--violet);letter-spacing:0.06em;display:block;margin-bottom:10px;}
+
+  .stat-strip{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:52px 40px;}
+  .stat-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:20px;text-align:left;}
+  @media (max-width:900px){.stat-grid{grid-template-columns:repeat(3,1fr);row-gap:32px;}}
+  @media (max-width:520px){.stat-grid{grid-template-columns:repeat(2,1fr);}}
+  .stat-grid .num{font-size:clamp(24px,3vw,36px);font-weight:800;font-variant-numeric:tabular-nums;}
+  .stat-grid .num::after{content:"+";color:var(--orange);}
+  .stat-grid .lbl{font-size:11.5px;color:var(--text-soft);text-transform:uppercase;letter-spacing:0.08em;margin-top:4px;font-family:ui-monospace,monospace;}
+
+  .pillars{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;}
+  @media (max-width:1024px){.pillars{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:560px){.pillars{grid-template-columns:1fr;}}
+
+  .insights{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+  @media (max-width:900px){.insights{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:560px){.insights{grid-template-columns:1fr;}}
+  .insight-thumb{height:120px;border-radius:10px 10px 0 0;position:relative;overflow:hidden;background:var(--panel-2);}
+  .insight-thumb::after{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);background-size:14px 14px;}
+  .insight-thumb::before{content:"";position:absolute;width:70%;height:70%;left:-10%;top:-10%;border-radius:50%;filter:blur(30px);opacity:0.5;}
+  .ic1::before{background:var(--red);} .ic2::before{background:var(--violet);} .ic3::before{background:var(--orange);} .ic4::before{background:#2FD9C4;}
+  .insight-card{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--panel);}
+  .insight-body{padding:16px 18px;}
+  .insight-body h3{font-size:14px;font-weight:700;margin:0;}
+
+  .cta-band{
+    background:
+      radial-gradient(420px 260px at 85% 0%, rgba(255,138,0,0.30), transparent 65%),
+      radial-gradient(360px 240px at 10% 100%, rgba(110,91,255,0.22), transparent 65%),
+      #0A0B0E;
+    border:1px solid rgba(255,255,255,0.12);border-radius:20px;padding:52px 44px;
+    display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;
+  }
+  .cta-band h2{font-size:clamp(22px,2.6vw,30px);max-width:22ch;color:#F3F4F6;}
+
+  footer{border-top:1px solid var(--line);padding:64px 0 28px;margin-top:20px;}
+  .foot-grid{display:grid;grid-template-columns:1.4fr repeat(5,1fr);gap:28px;}
+  @media (max-width:900px){.foot-grid{grid-template-columns:repeat(2,1fr);}}
+  .foot-grid h4{font-family:ui-monospace,monospace;font-size:11.5px;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-soft);margin:0 0 14px;}
+  .foot-grid ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px;}
+  .foot-grid a{text-decoration:none;color:var(--text-soft);font-size:13.5px;}
+  .foot-grid a:hover{color:var(--orange);}
+  .foot-bottom{border-top:1px solid var(--line);margin-top:44px;padding-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:12px;color:var(--text-soft);font-family:ui-monospace,monospace;}
+
+  @media (prefers-reduced-motion: reduce){ *{transition:none !important;} }
+</style>
+
+<header>
+  <div class="nav">
+    <div class="logo">TEQO<span>by Mahindra</span></div>
+    <nav class="links">
+      <a href="#">Home</a><a href="#">Company</a><a href="#">Services</a><a href="#">Software</a><a href="#">Resources</a><a href="#">Careers</a><a href="#">Contact Us</a>
+    </nav>
+    <a href="#" class="btn btn-primary">Talk to Us</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="mesh"></div>
+  <div class="grid-overlay"></div>
+  <div class="wrap hero-inner">
+    <span class="eyebrow">Renewable Energy Asset Management</span>
+    <h1>New age. Tech enabled.<br><span class="grad-text">Renewable energy</span> asset management.</h1>
+    <p class="lead">Technology. Intelligence. Performance. A single operating layer that maximizes returns from your renewable assets — built on the Mahindra Group's engineering scale.</p>
+    <div class="ctas">
+      <a href="#" class="btn btn-primary">Explore Our Solutions</a>
+      <a href="#" class="btn btn-ghost">Talk to Us →</a>
+    </div>
+    <div class="strip mono">
+      <div><strong>5</strong>core products</div>
+      <div><strong>24×7</strong>NOC monitoring</div>
+      <div><strong>XX+</strong>GW under management</div>
+      <div><strong>Mahindra</strong>Group backed</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="wrap" id="offerings">
+  <div class="section-head">
+    <span class="eyebrow">Key Offerings</span>
+    <h2>Full-stack renewable asset operations</h2>
+    <p>Teqo is a new-age, technology-enabled Renewable Energy Asset Management offering from the Mahindra Group.</p>
+  </div>
+  <div class="mosaic">
+    <div class="glass">
+      <div class="icon-ring"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 1-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 0 1 5.4-5.4l-3 3-2-2Z" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <h3>Solar PV Operations &amp; Maintenance</h3>
+      <p>Preventive &amp; corrective maintenance, plant operations, performance optimisation.</p>
+    </div>
+    <div class="glass">
+      <div class="icon-ring"><svg viewBox="0 0 24 24"><path d="M9 4H6a1 1 0 0 0-1 1v15a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1h-3M9 4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2M9 4a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2m-6 10 2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <h3>Solar PV Asset Management</h3>
+      <p>Administrative, financial, compliance &amp; contract management.</p>
+    </div>
+    <div class="glass">
+      <div class="icon-ring"><svg viewBox="0 0 24 24"><path d="M3 20h18M5 20V9l4-3 4 3v11M13 20v-6l4-3 4 3v6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <h3>Real-Time Monitoring &amp; Analytics</h3>
+      <p>Remote monitoring, performance analytics, intelligent insights.</p>
+    </div>
+    <div class="glass">
+      <div class="icon-ring"><svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="17.5" r=".6" fill="currentColor" stroke="none"/><path d="M9 6h6" stroke-linecap="round"/></svg></div>
+      <h3>Mobile PV Plant Health Diagnosis</h3>
+      <p>Field testing, technical assessment, asset health diagnosis.</p>
+    </div>
+    <div class="glass">
+      <div class="icon-ring"><svg viewBox="0 0 24 24"><path d="M9 3h6l4 4v11a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10.5" cy="13" r="2"/><path d="m14 16.5-2-2" stroke-linecap="round"/></svg></div>
+      <h3>Technical Due Diligence</h3>
+      <p>Risk identification, asset evaluation, acquisition support.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="wrap" id="software">
+  <div class="section-head">
+    <span class="eyebrow">Technology Suite</span>
+    <h2>The platform behind every decision</h2>
+  </div>
+  <div class="mosaic">
+    <div class="glass">
+      <span class="tag">01 / MONITORING</span>
+      <div class="icon-ring"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.2"/><path d="M12 2v1.4M12 12.6V14M4.8 8H6.2M17.8 8h1.4M6.5 3.5l1 1M16.5 3.5l-1 1M4 21h16l-4-5.5H8L4 21Z" stroke-linecap="round"/></svg></div>
+      <h3>SolarPulse™</h3>
+      <p>Solar PV monitoring and analytics.</p>
+    </div>
+    <div class="glass">
+      <span class="tag">02 / ANALYTICS</span>
+      <div class="icon-ring"><svg viewBox="0 0 24 24"><path d="M12 20V6M12 6l4 3M12 6 8 9M5 13h1.5a2.5 2.5 0 1 0-2.1-3.9M19 17h-1.5a2.2 2.2 0 1 1 1.8-3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <h3>WindPulse™</h3>
+      <p>Wind farm analytics and asset management.</p>
+    </div>
+    <div class="glass">
+      <span class="tag">03 / CONTROL</span>
+      <div class="icon-ring"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M8 20h8M12 16v4" stroke-linecap="round"/><circle cx="8" cy="10" r="1" fill="currentColor" stroke="none"/><circle cx="12" cy="10" r="1" fill="currentColor" stroke="none"/><circle cx="16" cy="10" r="1" fill="currentColor" stroke="none"/></svg></div>
+      <h3>TeqoNoc™</h3>
+      <p>24×7 central monitoring and control.</p>
+    </div>
+    <div class="glass">
+      <span class="tag">04 / OPERATIONS</span>
+      <div class="icon-ring"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1Z"/></svg></div>
+      <h3>TeqoOS™</h3>
+      <p>Renewable asset maintenance and operations management.</p>
+    </div>
+    <div class="glass">
+      <span class="tag">05 / PREDICTION</span>
+      <div class="icon-ring"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2" stroke-linecap="round" stroke-linejoin="round"/><path d="m4 10 3-3 3 2 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <h3>Teqolytics™</h3>
+      <p>Predictive analytics for identifying underperforming assets.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="wrap">
+  <div class="stat-strip">
+    <span class="eyebrow">Our Scale</span>
+    <div class="stat-grid" style="margin-top:24px;">
+      <div><div class="num">XX</div><div class="lbl">GW Assets Managed</div></div>
+      <div><div class="num">XX</div><div class="lbl">MW Assets Monitored</div></div>
+      <div><div class="num">XX</div><div class="lbl">Locations</div></div>
+      <div><div class="num">XX</div><div class="lbl">Countries</div></div>
+      <div><div class="num">XX</div><div class="lbl">Professionals</div></div>
+      <div><div class="num">XX</div><div class="lbl">Years of Experience</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="section-head">
+    <span class="eyebrow">Why Mahindra Teqo</span>
+    <h2>Built on scale, run like software</h2>
+  </div>
+  <div class="pillars">
+    <div class="glass"><div class="icon-ring"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.4"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M15 14.5c2.5.2 4.5 2.3 4.5 4.9" stroke-linecap="round"/></svg></div><h3>Mahindra Group Legacy</h3></div>
+    <div class="glass"><div class="icon-ring"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z" stroke-linejoin="round"/></svg></div><h3>Technology Driven</h3></div>
+    <div class="glass"><div class="icon-ring"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r=".6" fill="currentColor" stroke="none"/></svg></div><h3>Performance Focused</h3></div>
+    <div class="glass"><div class="icon-ring"><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 14-5M20 12a8 8 0 0 1-14 5M18 4v4h-4M6 20v-4h4" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>End-to-End Asset Management</h3></div>
+    <div class="glass"><div class="icon-ring"><svg viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6l-8-3Z" stroke-linejoin="round"/><path d="m9 12 2 2 4-4.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>Trusted Partner Globally</h3></div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="section-head">
+    <span class="eyebrow">Latest Insights</span>
+    <h2>Signal from the network</h2>
+  </div>
+  <div class="insights">
+    <div class="insight-card"><div class="insight-thumb ic1"></div><div class="insight-body"><h3>Latest Blogs</h3></div></div>
+    <div class="insight-card"><div class="insight-thumb ic2"></div><div class="insight-body"><h3>Case Studies</h3></div></div>
+    <div class="insight-card"><div class="insight-thumb ic3"></div><div class="insight-body"><h3>News &amp; Press Releases</h3></div></div>
+    <div class="insight-card"><div class="insight-thumb ic4"></div><div class="insight-body"><h3>Whitepapers &amp; Reports</h3></div></div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="cta-band">
+    <h2>One partner. Every <span class="grad-text">renewable</span> decision.</h2>
+    <a href="#" class="btn btn-primary">Talk to Our Experts</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="logo">TEQO<span>by Mahindra</span></div>
+        <p style="max-width:32ch;font-size:13.5px;color:var(--text-soft);margin-top:14px;">New-age, technology-enabled Renewable Energy Asset Management from the Mahindra Group.</p>
+      </div>
+      <div><h4>Company</h4><ul><li><a href="#">About</a></li></ul></div>
+      <div><h4>Services</h4><ul>
+        <li><a href="#">Solar PV O&amp;M</a></li><li><a href="#">Asset Management</a></li><li><a href="#">Monitoring &amp; Analytics</a></li><li><a href="#">Mobile Diagnosis</a></li><li><a href="#">Technical Due Diligence</a></li>
+      </ul></div>
+      <div><h4>Software</h4><ul>
+        <li><a href="#">SolarPulse™</a></li><li><a href="#">WindPulse™</a></li><li><a href="#">TeqoNoc™</a></li><li><a href="#">TeqoOS™</a></li><li><a href="#">Teqolytics™</a></li>
+      </ul></div>
+      <div><h4>Resources</h4><ul>
+        <li><a href="#">Blogs</a></li><li><a href="#">Case Studies</a></li><li><a href="#">Whitepapers</a></li><li><a href="#">News &amp; Press</a></li>
+      </ul></div>
+      <div><h4>Careers</h4><ul><li><a href="#">Open Positions</a></li><li><a href="#">Life at Teqo</a></li></ul>
+        <h4 style="margin-top:22px;">Contact</h4><ul><li><a href="#">Get in Touch</a></li><li><a href="#">Our Presence</a></li></ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Mahindra Teqo. All rights reserved.</span>
+      <span>Design concept 2 of 3 — "Grid"</span>
+    </div>
+  </div>
+</footer>

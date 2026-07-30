@@ -1,0 +1,72 @@
+<title>Mahindra TEQO — Homepage Design Concepts</title>
+<meta name="description" content="Three homepage design directions for the Mahindra TEQO Phase 1 website, each drawing on a different Mahindra Group sister-brand." />
+<style>
+  :root{
+    --bg:#101418; --panel:#181D22; --text:#EEF1F4; --soft:#9AA4B0; --line:rgba(255,255,255,0.10);
+    --a1:#A8D93A; --a2:#FF6A3D; --a3:#C8102E;
+  }
+  :root[data-theme="light"]{ --bg:#F4F2ED; --panel:#FFFFFF; --text:#1B2027; --soft:#5B6472; --line:rgba(20,20,20,0.10); }
+  @media (prefers-color-scheme: light){
+    :root:not([data-theme="dark"]){ --bg:#F4F2ED; --panel:#FFFFFF; --text:#1B2027; --soft:#5B6472; --line:rgba(20,20,20,0.10); }
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:ui-sans-serif,-apple-system,"Segoe UI",system-ui,sans-serif;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:1100px;margin:0 auto;padding:72px 32px 100px;}
+  h1{font-size:clamp(28px,4vw,42px);margin:0 0 12px;letter-spacing:-0.01em;text-wrap:balance;}
+  .lead{color:var(--soft);font-size:16px;max-width:64ch;line-height:1.6;margin:0 0 56px;}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  @media (max-width:880px){.cards{grid-template-columns:1fr;}}
+  a.card{
+    display:block;text-decoration:none;color:var(--text);
+    background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  a.card:hover, a.card:focus-visible{transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,0.28);outline:none;}
+  .swatch{height:120px;position:relative;}
+  .s1{background:linear-gradient(135deg,#FBF9F4 0%,#FBF9F4 40%,#0E2A3D 40%,#0E2A3D 60%,#A8D93A 60%,#A8D93A 100%);}
+  .s2{background:linear-gradient(135deg,#0A0B0E 0%,#0A0B0E 55%, #FF3B30 55%, #FF8A00 100%);}
+  .s3{background:linear-gradient(135deg,#F7F3EC 0%,#F7F3EC 45%,#C8102E 45%,#C8102E 75%,#9C7A3C 75%,#9C7A3C 100%);}
+  .card-body{padding:22px 24px 26px;}
+  .kicker{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--soft);}
+  .card h2{font-size:19px;margin:8px 0 8px;}
+  .card p{font-size:13.5px;color:var(--soft);line-height:1.55;margin:0 0 16px;}
+  .tags{display:flex;gap:8px;flex-wrap:wrap;}
+  .tag{font-size:11px;padding:4px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);}
+  footer.note{margin-top:64px;padding-top:24px;border-top:1px solid var(--line);color:var(--soft);font-size:13px;line-height:1.6;}
+</style>
+<div class="wrap">
+  <h1>Mahindra TEQO — Phase 1 homepage, three ways</h1>
+  <p class="lead">Same content and information architecture from the approved outline and wireframe — Home, Company, Services, Software, Resources, Careers, Contact Us — restyled around three different Mahindra Group sister-brand visual languages for internal review.</p>
+  <div class="cards">
+    <a class="card" href="concept-1-solaris.html">
+      <div class="swatch s1"></div>
+      <div class="card-body">
+        <div class="kicker">Concept 01</div>
+        <h2>Solaris</h2>
+        <p>Warm horizon light, navy + signal lime, sister-brand renewable-energy feel — closest to Mahindra Susten.</p>
+        <div class="tags"><span class="tag">Susten-inspired</span><span class="tag">Warm &amp; optimistic</span></div>
+      </div>
+    </a>
+    <a class="card" href="concept-2-grid.html">
+      <div class="swatch s2"></div>
+      <div class="card-body">
+        <div class="kicker">Concept 02</div>
+        <h2>Grid</h2>
+        <p>Dark enterprise-tech surface, red-orange energy gradient, glass panels — closest to Tech Mahindra.</p>
+        <div class="tags"><span class="tag">Tech Mahindra-inspired</span><span class="tag">Bold &amp; technical</span></div>
+      </div>
+    </a>
+    <a class="card" href="concept-3-ledger.html">
+      <div class="swatch s3"></div>
+      <div class="card-body">
+        <div class="kicker">Concept 03</div>
+        <h2>Ledger</h2>
+        <p>Structured red &amp; ivory, serif headlines, bordered ledger grids — closest to Mahindra Finance.</p>
+        <div class="tags"><span class="tag">Mahindra Finance-inspired</span><span class="tag">Institutional &amp; trust-led</span></div>
+      </div>
+    </a>
+  </div>
+  <footer class="note">
+    Content sourced from the client's RFQ (Mahindra TEQO Phase 1 outline) and the shared wireframe screenshot. Stats are left as "XX+" placeholders pending real figures from the client. All three pages share the same seven-item navigation and section order; only the visual system changes.
+  </footer>
+</div>
