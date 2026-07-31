@@ -1,7 +1,7 @@
 const FEATURED = {
   category: "News & Media",
-  title: "Mahindra Teqo Crosses 6 GWp of Renewable Assets Under Management",
-  blurb: "Reinforcing leadership in solar and wind O&M and asset management across global markets.",
+  title: "Mahindra Teqo Reinforces Leadership in Renewable Asset Management",
+  blurb: "A look at how Teqo's O&M and asset management practice is scaling across global markets.",
 }
 
 const INSIGHTS = [

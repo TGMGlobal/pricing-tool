@@ -15,6 +15,8 @@ export default defineConfig({
       input: {
         main: fileURLToPath(new URL('./index.html', import.meta.url)),
         teqo: fileURLToPath(new URL('./teqo.html', import.meta.url)),
+        teqoSignal: fileURLToPath(new URL('./teqo-signal.html', import.meta.url)),
+        teqoLedger: fileURLToPath(new URL('./teqo-ledger.html', import.meta.url)),
       },
     },
   },

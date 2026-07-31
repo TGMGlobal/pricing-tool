@@ -15,7 +15,7 @@ export function ImpactBand() {
       <div className="relative mx-auto max-w-4xl px-4 text-center">
         <p className="text-sm font-semibold uppercase tracking-wider text-emerald-300">Real-time, at scale</p>
         <p className="mt-5 bg-gradient-to-r from-cyan-300 via-white to-emerald-300 bg-clip-text text-4xl font-bold tracking-tight text-transparent sm:text-6xl">
-          4,800+ MWh
+          XX,XXX+ MWh
         </p>
         <p className="mt-3 text-lg font-medium text-white/80 sm:text-xl">
           of clean generation monitored and optimized across the Teqo portfolio, every single day

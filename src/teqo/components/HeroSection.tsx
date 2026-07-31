@@ -6,9 +6,9 @@ import { Button } from "@/components/ui/button"
 import { HorizonSilhouette } from "./Illustrations"
 
 const CREDENTIALS = [
-  { value: "6+ GWp", label: "Portfolio managed" },
+  { value: "XX+ GW", label: "Assets managed" },
   { value: "24×7", label: "Central monitoring" },
-  { value: "500+", label: "Years, combined team experience" },
+  { value: "XX+", label: "Countries" },
 ]
 
 export function HeroSection() {
@@ -36,15 +36,14 @@ export function HeroSection() {
         </Badge>
 
         <h1 className="relative z-10 max-w-4xl animate-appear text-4xl font-semibold leading-[1.08] tracking-tight text-balance sm:text-6xl md:text-[4.25rem]">
-          Powering the world's{" "}
+          New age. Tech enabled.{" "}
           <span className="bg-gradient-to-r from-white via-emerald-100 to-cyan-100 bg-clip-text text-transparent">
-            renewable assets
+            Renewable energy asset management.
           </span>
         </h1>
 
         <p className="relative z-10 max-w-2xl animate-appear text-lg font-medium text-white/85 opacity-0 [animation-delay:120ms] sm:text-xl">
-          Teqo is the Mahindra Group's new-age, technology-enabled Renewable Energy Asset
-          Management offering — built to maximize returns from every solar and wind portfolio it runs.
+          Technology. Intelligence. Performance. Maximizing returns from your renewable assets.
         </p>
 
         <div className="relative z-10 flex animate-appear flex-col gap-3 opacity-0 [animation-delay:280ms] sm:flex-row">

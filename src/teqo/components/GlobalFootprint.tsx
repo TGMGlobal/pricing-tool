@@ -3,14 +3,14 @@ import { Activity, Globe2, Users } from "lucide-react"
 import { WorldMap } from "./Illustrations"
 
 const STATS = [
-  { value: "6+ GWp", label: "Portfolio managed" },
-  { value: "10+", label: "Countries served" },
+  { value: "XX+ GW", label: "Portfolio managed" },
+  { value: "XX+", label: "Countries served" },
 ]
 
 const CAPABILITIES = [
   { icon: Globe2, label: "Global operations desk" },
   { icon: Activity, label: "24×7 remote monitoring" },
-  { icon: Users, label: "500+ years, combined team experience" },
+  { icon: Users, label: "XX+ years, combined team experience" },
 ]
 
 export function GlobalFootprint() {
