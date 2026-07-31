@@ -1,8 +1,9 @@
 import { CtaBand } from "./components/CtaBand"
+import { GlobalFootprint } from "./components/GlobalFootprint"
 import { HeroSection } from "./components/HeroSection"
+import { ImpactBand } from "./components/ImpactBand"
 import { KeyOfferings } from "./components/KeyOfferings"
 import { LatestInsights } from "./components/LatestInsights"
-import { ScaleStats } from "./components/ScaleStats"
 import { SiteFooter } from "./components/SiteFooter"
 import { SiteHeader } from "./components/SiteHeader"
 import { TechnologySuite } from "./components/TechnologySuite"
@@ -15,8 +16,9 @@ export default function Home() {
       <main>
         <HeroSection />
         <KeyOfferings />
+        <ImpactBand />
+        <GlobalFootprint />
         <TechnologySuite />
-        <ScaleStats />
         <WhyTeqo />
         <LatestInsights />
         <CtaBand />

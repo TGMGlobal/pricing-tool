@@ -20,10 +20,7 @@ export function SiteHeader() {
     <header className="fixed inset-x-0 top-0 z-50 border-b border-border/70 bg-background/80 backdrop-blur-md">
       <div className="mx-auto flex h-18 max-w-6xl items-center justify-between px-4 py-3">
         <a href="#" className="flex items-baseline gap-2">
-          <span className="text-xl font-bold tracking-tight">TEQO</span>
-          <span className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
-            by Mahindra
-          </span>
+          <span className="text-xl font-bold tracking-tight text-brand">TEQO</span>
         </a>
 
         <nav className="hidden items-center gap-8 text-sm font-medium text-muted-foreground lg:flex">
@@ -34,7 +31,8 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        <div className="hidden lg:block">
+        <div className="hidden items-center gap-5 lg:flex">
+          <span className="text-sm font-semibold italic tracking-tight text-mahindra-red">mahindra</span>
           <Button size="sm" asChild>
             <a href="#contact">Talk to Us</a>
           </Button>
